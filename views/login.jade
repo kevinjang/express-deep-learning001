@@ -1,0 +1,21 @@
+doctype html
+html
+    head 
+        title 'Login'
+    body
+        form(action="/login", method="post")
+            div
+                img(src="https://scpic.chinaz.net/files/pic/pic9/202106/apic33338.jpg", alt="", srcset="")
+            table
+                tbody
+                    tr
+                        td 
+                            label(for="username") 用户名：
+                        td 
+                            input(type="text", name="username")
+                    tr
+                        td 
+                            label(for="pwd") 密码：
+                        td 
+                            input(type="password", name="pwd")
+
