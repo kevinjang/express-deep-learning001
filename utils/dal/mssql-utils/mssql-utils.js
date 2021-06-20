@@ -20,15 +20,11 @@ const sql = require('mssql');
 
 const {Request} = sql;
 
-async function test(){
+async function test({logger}){
     try {
-        // console.log(sql.connect)
         let pool = new sql.ConnectionPool(config);
-        // pool.connect();
+        
         await pool.connect();
-        // console.log('pool:', pool)
-
-        // (await pool).on()
 
         pool.on('error', err=>{
             console.log('pool error:', err)
@@ -36,12 +32,16 @@ async function test(){
 
         const request = new Request(pool);
         request.on('row', row=>{
-
+            console.log('request row:', row)
         })
 
         request.on('done', ()=>{
             console.log('request done, about to close the connection')
             pool.close();
+        })
+
+        request.on('requestCompleted', ()=>{
+            console.log('request completed')
         })
 
         let result1 = await request.query('select 1 as name');

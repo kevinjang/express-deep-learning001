@@ -29,6 +29,11 @@ app.use(
     level: 1,
   })
 );
+app.all('*',(req, res, next)=>{
+  console.log('app all ')
+  req.logger = logger;
+  next();
+})
 app.all('/',function(req, res, next){
   // console.log('app all route')
   // debug('booting %o', 'my app');
